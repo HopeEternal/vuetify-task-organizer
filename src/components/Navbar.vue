@@ -14,6 +14,14 @@
     </v-app-bar>
 
     <v-navigation-drawer v-model="drawer" app class="primary">
+      <v-layout column align-center>
+        <v-flex class="mt-5">
+          <v-avatar size="100">
+            <img src="/avatar-3.png" />
+          </v-avatar>
+          <p class="white--text subheading mt-1">Hope Eternal</p>
+        </v-flex>
+      </v-layout>
       <v-list class="primary">
         <v-list-item v-for="item in items" :key="item.text" link :to="item.route">
           <v-list-item-icon>
