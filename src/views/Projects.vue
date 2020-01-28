@@ -1,7 +1,7 @@
 <template>
   <div class="projects">
     <h1 class="subheading grey--text text--darken-3">Projects</h1>
-    <p>hi</p>
+
     <v-container class="my-5">
       <v-expansion-panels accordion>
         <v-expansion-panel v-for="project in myProjects" :key="project.title">
