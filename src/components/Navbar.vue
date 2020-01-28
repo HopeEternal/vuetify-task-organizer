@@ -7,7 +7,22 @@
         <span>Organizer</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn flat color="grey" right>
+
+      <v-menu offset-y>
+        <template v-slot:activator="{ on }">
+          <v-btn text v-on="on" color="grey" class="mr-4">
+            <v-icon left>mdi-chevron-down</v-icon>
+            <span>Menu</span>
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-item v-for="item in items" :key="item.text" router :to="item.route">
+            <v-list-item-title>{{ item.text }}</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+
+      <v-btn text color="grey" right>
         <span>Sign Out</span>
         <v-icon right>mdi-logout-variant</v-icon>
       </v-btn>
@@ -42,9 +57,9 @@ export default {
     return {
       drawer: false,
       items: [
-        { icon: 'mdi-view-dashboard', text: 'Dashboard', route: '/' },
-        { icon: 'mdi-folder', text: 'My Projects', route: '/projects' },
-        { icon: 'mdi-account-group', text: 'Team', route: '/team' }
+        { icon: "mdi-view-dashboard", text: "Dashboard", route: "/" },
+        { icon: "mdi-folder", text: "My Projects", route: "/projects" },
+        { icon: "mdi-account-group", text: "Team", route: "/team" }
       ]
     };
   }
