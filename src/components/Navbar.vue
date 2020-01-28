@@ -36,6 +36,9 @@
           </v-avatar>
           <p class="white--text subheading mt-1">Hope Eternal</p>
         </v-flex>
+        <v-flex class="mt-4 mb-3">
+          <Popup />
+        </v-flex>
       </v-layout>
       <v-list class="primary">
         <v-list-item v-for="item in items" :key="item.text" link :to="item.route">
@@ -52,7 +55,9 @@
 </template>
 
 <script>
+import Popup from "./Popup";
 export default {
+  components: { Popup },
   data() {
     return {
       drawer: false,
