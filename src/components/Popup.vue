@@ -5,7 +5,9 @@
         <v-btn class="success" dark v-on="on">Add New Project</v-btn>
       </template>
       <v-card>
-        <v-card-title class="headline grey lighten-2" primary-title>Add a New Project</v-card-title>
+        <v-card-title class="headline grey lighten-2" primary-title
+          >Add a New Project</v-card-title
+        >
         <v-card-text>
           <v-form class="px-3" ref="form">
             <v-text-field
@@ -34,7 +36,9 @@
               <v-date-picker v-model="due"></v-date-picker>
             </v-menu>
 
-            <v-btn text class="success mx-0 mt-3" @click="submit">Add Project</v-btn>
+            <v-btn text class="success mx-0 mt-3" @click="submit"
+              >Add Project</v-btn
+            >
           </v-form>
         </v-card-text>
       </v-card>
@@ -42,27 +46,39 @@
   </div>
 </template>
 <script>
-import format from "date-fns/format";
+import format from 'date-fns/format';
+import db from '@/fb';
 export default {
   data() {
     return {
-      title: "",
-      content: "",
+      title: '',
+      content: '',
       due: null,
-      inputRules: [v => v.length >= 3 || "Minimum length is 3 characters"]
+      inputRules: [v => v.length >= 3 || 'Minimum length is 3 characters']
     };
   },
   methods: {
     submit() {
       if (this.$refs.form.validate()) {
         //Submit Form
-        console.log(this.title, this.content);
+        const project = {
+          title: this.title,
+          content: this.content,
+          due: format(parseInt(this.due), 'Do MMM yyyy'),
+          person: 'Hope Eternal',
+          status: 'ongoing'
+        };
+        db.collection('projects')
+          .add(project)
+          .then(() => {
+            console.log('Added to db.');
+          });
       }
     }
   },
   computed: {
     formattedDate() {
-      return this.due ? format(parseInt(this.due), "do MMM yyyy") : "";
+      return this.due ? format(parseInt(this.due), 'do MMM yyyy') : '';
     }
   }
 };
