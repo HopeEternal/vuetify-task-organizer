@@ -1,7 +1,14 @@
 <template>
   <nav>
+    <v-snackbar v-model="snackbar" :timeout="4000" top color="success">
+      <span>Great! A new project has been added.</span>
+      <v-btn text color="white" @click="snackbar = false">Close</v-btn>
+    </v-snackbar>
     <v-app-bar flat app>
-      <v-app-bar-nav-icon class="grey--text" @click="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon
+        class="grey--text"
+        @click="drawer = !drawer"
+      ></v-app-bar-nav-icon>
       <v-toolbar-title class="text-uppercase grey--text">
         <span class="font-weight-light">Task</span>
         <span>Organizer</span>
@@ -16,7 +23,12 @@
           </v-btn>
         </template>
         <v-list>
-          <v-list-item v-for="item in items" :key="item.text" router :to="item.route">
+          <v-list-item
+            v-for="item in items"
+            :key="item.text"
+            router
+            :to="item.route"
+          >
             <v-list-item-title>{{ item.text }}</v-list-item-title>
           </v-list-item>
         </v-list>
@@ -37,16 +49,23 @@
           <p class="white--text subheading mt-1">Hope Eternal</p>
         </v-flex>
         <v-flex class="mt-4 mb-3">
-          <Popup />
+          <Popup @projectAdded="snackbar = true" />
         </v-flex>
       </v-layout>
       <v-list class="primary">
-        <v-list-item v-for="item in items" :key="item.text" link :to="item.route">
+        <v-list-item
+          v-for="item in items"
+          :key="item.text"
+          link
+          :to="item.route"
+        >
           <v-list-item-icon>
             <v-icon class="white--text">{{ item.icon }}</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            <v-list-item-title class="white--text">{{ item.text }}</v-list-item-title>
+            <v-list-item-title class="white--text">{{
+              item.text
+            }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -55,17 +74,18 @@
 </template>
 
 <script>
-import Popup from "./Popup";
+import Popup from './Popup';
 export default {
   components: { Popup },
   data() {
     return {
       drawer: false,
       items: [
-        { icon: "mdi-view-dashboard", text: "Dashboard", route: "/" },
-        { icon: "mdi-folder", text: "My Projects", route: "/projects" },
-        { icon: "mdi-account-group", text: "Team", route: "/team" }
-      ]
+        { icon: 'mdi-view-dashboard', text: 'Dashboard', route: '/' },
+        { icon: 'mdi-folder', text: 'My Projects', route: '/projects' },
+        { icon: 'mdi-account-group', text: 'Team', route: '/team' }
+      ],
+      snackbar: false
     };
   }
 };
